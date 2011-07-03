@@ -148,7 +148,8 @@ class Markdown {
 	}
 	
 	public static function parse($text) {
-		$parser = new get_class();
+		$class = get_class();
+		$parser = new $class;
 		return $parser->transform($text);
 	}
 
