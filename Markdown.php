@@ -6,43 +6,43 @@ class Markdown {
 
 	# Regex to match balanced [brackets].
 	# Needed to insert a maximum bracked depth while converting to PHP.
-	protected var $nested_brackets_depth = 6;
-	protected var $nested_brackets_re;
+	protected $nested_brackets_depth = 6;
+	protected $nested_brackets_re;
 	
-	protected var $nested_url_parenthesis_depth = 4;
-	protected var $nested_url_parenthesis_re;
+	protected $nested_url_parenthesis_depth = 4;
+	protected $nested_url_parenthesis_re;
 
 	# Table of hash values for escaped characters:
-	protected var $escape_chars = '\`*_{}[]()>#+-.!';
-	protected var $escape_chars_re;
+	protected $escape_chars = '\`*_{}[]()>#+-.!';
+	protected $escape_chars_re;
 
 	# Change to ">" for HTML output.
-	protected var $empty_element_suffix = ' />';
-	protected var $tab_width = 3;
+	protected $empty_element_suffix = ' />';
+	protected $tab_width = 3;
 	
 	# Change to `true` to disallow markup or entities.
-	protected var $no_markup = false;
-	protected var $no_entities = false;
+	protected $no_markup = false;
+	protected $no_entities = false;
 	
 	# Predefined urls and titles for reference links and images.
-	protected var $predef_urls = array();
-	protected var $predef_titles = array();
+	protected $predef_urls = array();
+	protected $predef_titles = array();
 
 	# Internal hashes used during transformation.
-	protected var $urls = array();
-	protected var $titles = array();
-	protected var $html_hashes = array();
+	protected $urls = array();
+	protected $titles = array();
+	protected $html_hashes = array();
 	
 	# Status flag to avoid invalid nesting.
-	protected var $in_anchor = false;
+	protected $in_anchor = false;
 	
-	protected var $document_gamut = array(
+	protected $document_gamut = array(
 		# Strip link definitions, store in hashes.
 		"stripLinkDefinitions" => 20,
 		"runBasicBlockGamut"   => 30,
 	);
 	
-	protected var $block_gamut = array(
+	protected $block_gamut = array(
 	#
 	# These are all the transformations that form block-level
 	# tags like paragraphs, headers, and list items.
@@ -55,7 +55,7 @@ class Markdown {
 		"doBlockQuotes"     => 60,
 	);
 	
-	protected var $span_gamut = array(
+	protected $span_gamut = array(
 	#
 	# These are all the transformations that occur *within* block-level
 	# tags like paragraphs, headers, and list items.
@@ -79,28 +79,28 @@ class Markdown {
 		"doHardBreaks"        =>  60,
 	);
 	
-	protected var $list_level = 0;
+	protected $list_level = 0;
 	
-	protected var $em_relist = array(
+	protected $em_relist = array(
 		''  => '(?:(?<!\*)\*(?!\*)|(?<!_)_(?!_))(?=\S|$)(?![.,:;]\s)',
 		'*' => '(?<=\S|^)(?<!\*)\*(?!\*)',
 		'_' => '(?<=\S|^)(?<!_)_(?!_)',
 		);
-	protected var $strong_relist = array(
+	protected $strong_relist = array(
 		''   => '(?:(?<!\*)\*\*(?!\*)|(?<!_)__(?!_))(?=\S|$)(?![.,:;]\s)',
 		'**' => '(?<=\S|^)(?<!\*)\*\*(?!\*)',
 		'__' => '(?<=\S|^)(?<!_)__(?!_)',
 		);
-	protected var $em_strong_relist = array(
+	protected $em_strong_relist = array(
 		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<!_)___(?!_))(?=\S|$)(?![.,:;]\s)',
 		'***' => '(?<=\S|^)(?<!\*)\*\*\*(?!\*)',
 		'___' => '(?<=\S|^)(?<!_)___(?!_)',
 		);
-	protected var $em_strong_prepared_relist;
+	protected $em_strong_prepared_relist;
 	
 	# String length function for detab. `_initDetab` will create a function to 
 	# hanlde UTF-8 if the default function does not exist.
-	protected var $utf8_strlen = 'mb_strlen';
+	protected $utf8_strlen = 'mb_strlen';
 
 	/**
 	 * Constructor
@@ -148,7 +148,7 @@ class Markdown {
 	}
 	
 	public static function parse($text) {
-		$parser = new get_class(static);
+		$parser = new get_class();
 		return $parser->transform($text);
 	}
 
